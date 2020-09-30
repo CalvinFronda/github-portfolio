@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
+import { Card, Button, Row, Col, } from 'react-bootstrap';
 
 const ProjectCards = (props) => {
 
@@ -9,21 +9,17 @@ const ProjectCards = (props) => {
     const truncateDescription = (description) => {
         if (description)
             return description.length > 197 ? description.substring(0, 197) + "..." : description;
-
     }
 
 
     return (
-        <Col style={{ paddingBottom: "2vh" }} sm="6">
+        <Col style={{ paddingBottom: "2vh", paddingTop: "2vh" }} sm="6">
             <Card body >
-                <CardTitle>{name}</CardTitle>
-                <CardText>{truncateDescription(description)}</CardText>
-                <CardText>Forks:{forkCount} Stars:{stargazerCount}</CardText>
+                <Card.Title>{name}</Card.Title>
+                <Card.Text>{truncateDescription(description)}</Card.Text>
+                <Card.Text>Forks:{forkCount} Stars:{stargazerCount}</Card.Text>
             </Card>
         </Col>
-
-
-
     );
 };
 

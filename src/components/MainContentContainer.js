@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, CardDeck } from 'reactstrap';
+import { Container, Row, Col, CardDeck, Tabs, Tab } from 'react-bootstrap';
 import ProjectCards from "./ProjectCards"
 import AboutMeSideBar from "./AboutMeSideBar"
 import { useQuery, gql } from "@apollo/client";
@@ -8,7 +8,7 @@ import { useQuery, gql } from "@apollo/client";
 const GITHUB_DATA = gql`
 query getGithubData {
     user(login: "calvinfronda") {
-      pinnedItems(first: 5, types: [REPOSITORY, GIST]) {
+      pinnedItems(first: 6, types: [REPOSITORY, GIST]) {
         totalCount
         edges {
           node {
@@ -34,10 +34,15 @@ query getGithubData {
 
 const MainContentContainer = (props) => {
 
-  const [githubDataList, setGithubDataList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { loading, error, data } = useQuery(GITHUB_DATA);
+
+  const [activeTab, setActiveTab] = useState("1");
+
+  const toggle = tab => {
+    if (activeTab !== tab) setActiveTab(tab);
+  }
 
 
   if (loading) return <p>Loading...</p>;
@@ -64,20 +69,34 @@ const MainContentContainer = (props) => {
 
 
   return (
-    <Container style={{ paddingTop: "5em" }}>
-      <Row >
+    <Container className="main-content-container" fluid style={{ paddingLeft: "20em", paddingRight: "20em", paddingTop: "5em" }}>
+      <Row>
         <AboutMeSideBar />
 
 
-        <Col >
-          <CardDeck >
-            {projectData.map((projectData) =>
-              <ProjectCards projectData={projectData} isLoaded={isLoaded} />
-            )}
-          </CardDeck>
+        <Col xs="8">
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={activeTab}
+            onSelect={(k) => toggle(k)}
+          >
+            <Tab eventKey="home" title="Home">
+              <CardDeck >
+                {projectData.map((projectData) =>
+                  <ProjectCards projectData={projectData} isLoaded={isLoaded} />
+                )}
+              </CardDeck>
+            </Tab>
+            <Tab eventKey="profile" title="Profile">
+              <h1>Testing </h1>
+            </Tab>
+            <Tab eventKey="contact" title="Contact" >
+              <h1>Another</h1>
+            </Tab>
+          </Tabs>
+
         </Col>
       </Row>
-
     </Container>
   );
 }
