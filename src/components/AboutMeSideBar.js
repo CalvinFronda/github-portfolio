@@ -1,5 +1,6 @@
 import React from "react";
 import profilePicture from "../calvin.png"
+import "./style/main.scss"
 
 
 import { Col, Row, Image } from 'react-bootstrap';
@@ -7,14 +8,15 @@ import { Col, Row, Image } from 'react-bootstrap';
 const AboutMeSideBar = () => {
     return (
 
-        <Col xs={4} xl={2}>
+        <Col xs={4} md={3} xl={2}>
             <Image
                 alt="..."
                 roundedCircle
                 fluid
                 src={profilePicture}
-                style={{ width: "300px", height: "300px" }}
-            ></Image>
+                style={{ height: "auto", maxWidth: "100%" }}
+            />
+
             <Row style={{ paddingTop: "10px" }}>
                 <h1>Calvin Fronda</h1>
             </Row>

@@ -38,7 +38,7 @@ const MainContentContainer = (props) => {
 
   const { loading, error, data } = useQuery(GITHUB_DATA);
 
-  const [activeTab, setActiveTab] = useState("1");
+  const [activeTab, setActiveTab] = useState("home");
 
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -69,25 +69,28 @@ const MainContentContainer = (props) => {
 
 
   return (
-    <Container className="main-content-container" fluid style={{ paddingLeft: "20em", paddingRight: "20em", paddingTop: "5em" }}>
+    <Container className="main-content-container" fluid style={{ paddingLeft: "10em", paddingRight: "10em", paddingTop: "5em" }}>
       <Row>
         <AboutMeSideBar />
 
 
         <Col xs="8">
+
           <Tabs
             id="controlled-tab-example"
             activeKey={activeTab}
+
             onSelect={(k) => toggle(k)}
           >
             <Tab eventKey="home" title="Home">
+              <h3>Pinned</h3>
               <CardDeck >
                 {projectData.map((projectData) =>
                   <ProjectCards projectData={projectData} isLoaded={isLoaded} />
                 )}
               </CardDeck>
             </Tab>
-            <Tab eventKey="profile" title="Profile">
+            <Tab eventKey="about" title="About">
               <h1>Testing </h1>
             </Tab>
             <Tab eventKey="contact" title="Contact" >

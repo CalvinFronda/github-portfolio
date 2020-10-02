@@ -9,7 +9,7 @@ const Homepage = () => {
 
     return (
         <>
-            <TopNavBar />
+            {/* <TopNavBar /> */}
             <MainContentContainer />
         </>
     )
